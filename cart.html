@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Cart - FreshMart</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- TOP BAR -->
+
+    <div class="top-bar">
+        Fresh Products | Best Prices
+    </div>
+
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            <h1>FreshMart</h1>
+
+            <p>Fresh • Healthy • Affordable</p>
+
+        </div>
+
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search products..."
+                onkeyup="searchProducts()">
+
+        </div>
+
+
+        <div class="cart-icon">
+
+            🛒 Cart
+            <span id="cartCount">0</span>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="navbar">
+
+        <a href="index.html">Home</a>
+
+        <a href="shop.html">Shop</a>
+
+        <a href="offers.html">Offers</a>
+
+        <a href="about.html">About</a>
+
+        <a href="product.html">Categories</a>
+
+        <a href="cart.html">Cart</a>
+
+    </nav>
+
+
+
+    <!-- CART SECTION -->
+
+    <section class="cart-section">
+
+        <h2>🛒 Your Shopping Cart</h2>
+
+
+        <!-- PRODUCTS WILL COME HERE -->
+
+        <div id="cartItems">
+
+        </div>
+
+
+        <!-- CART SUMMARY -->
+
+        <div class="cart-summary">
+
+            <h2>
+                Total:
+                <span id="cartTotal">₹0</span>
+            </h2>
+
+
+            <div class="cart-buttons">
+
+                <button
+                    onclick="shopNow()"
+                    class="continue-shopping">
+
+                    Continue Shopping
+
+                </button>
+
+
+                <button
+                    onclick="clearCart()"
+                    class="clear-cart">
+
+                    Clear Cart
+
+                </button>
+
+
+                <button
+                    onclick="checkout()"
+                    class="checkout-btn">
+
+                    Proceed to Checkout
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 FreshMart | Fresh Products | Best Prices
+        </p>
+
+    </footer>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+/* ---------- CART PAGE ---------- */
+
+.cart-page {
+    padding: 50px;
+    background-color: #f8f8f8;
+    min-height: 500px;
+}
+
+.cart-page h1 {
+    text-align: center;
+    color: #2e7d32;
+    font-size: 32px;
+    margin-bottom: 35px;
+}
+
+
+/* ---------- Cart Items ---------- */
+
+#cartItems {
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+
+.cart-item {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.cart-item h3 {
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.cart-item p {
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+
+/* ---------- Quantity Buttons ---------- */
+
+.quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: #2e7d32;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+/* ---------- Remove Button ---------- */
+
+.remove-btn {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+/* ---------- Total ---------- */
+
+#cartTotal {
+    max-width: 800px;
+    margin: auto;
+    text-align: right;
+    color: #2e7d32;
+    font-size: 24px;
+}
+
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 600px) {
+
+    .cart-page {
+        padding: 30px 15px;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    #cartTotal {
+        text-align: center;
+    }
+}

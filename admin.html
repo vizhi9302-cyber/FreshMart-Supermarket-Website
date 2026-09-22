@@ -1,0 +1,842 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FreshMart - Admin Dashboard</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f6f8;
+        }
+
+        header {
+            background: #198754;
+            color: white;
+            padding: 18px 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1100px;
+            margin: 25px auto;
+        }
+
+        .box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .add-product input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .add-btn {
+            background: #198754;
+            color: white;
+            border: none;
+
+            padding: 12px 20px;
+            margin-top: 10px;
+
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .add-btn:hover {
+            background: #146c43;
+        }
+
+        .order-card {
+border: 1px solid #ddd;
+            border-radius: 8px;
+
+            padding: 18px;
+            margin-bottom: 20px;
+        }
+
+        .order-card h3 {
+            margin-top: 0;
+            color: #198754;
+        }
+
+        .order-card p {
+            margin: 7px 0;
+        }
+
+        .items {
+            margin-top: 15px;
+            padding: 12px;
+
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .status-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .status-row select {
+            padding: 9px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .update-btn {
+            background: #0d6efd;
+            color: white;
+
+            border: none;
+            padding: 9px 15px;
+
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 19px;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .box {
+                padding: 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>🛒 FreshMart Admin</h1>
+
+        <button
+            class="logout-btn"
+            onclick="logoutAdmin()">
+
+            Logout
+
+        </button>
+
+    </header>
+
+
+    <div class="container">
+
+
+        <!-- ========================= -->
+        <!-- ADD PRODUCT -->
+        <!-- ========================= -->
+
+        <section class="box add-product">
+
+            <h2>➕ Add New Product</h2>
+
+            <input
+                type="text"
+                id="productName"
+                placeholder="Product Name"
+            >
+
+            <input
+                type="number"
+                id="productPrice"
+                placeholder="Price"
+            >
+
+            <input
+                type="text"
+                id="productCategory"
+                placeholder="Category"
+            >
+
+            <input
+                type="text"
+                id="productImage"
+                placeholder="Image path e.g. img/carrot.jpg"
+            >
+
+            <button
+                class="add-btn"
+                onclick="addProduct()">
+
+                Add Product
+
+            </button>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- ORDERS -->
+        <!-- ========================= -->
+
+        <section class="box">
+
+            <h2>📦 Customer Orders</h2>
+
+            <div id="ordersContainer">
+
+                Loading orders...
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+
+<script>
+
+
+// =====================================
+// ADMIN LOGIN CHECK
+// =====================================
+
+if (
+    localStorage.getItem("adminLoggedIn")
+    !== "true"
+) {
+
+    window.location.href =
+        "admin-login.html";
+
+}
+
+
+// =====================================
+// LOGOUT
+// =====================================
+
+function logoutAdmin() {
+
+    localStorage.removeItem(
+        "adminLoggedIn"
+    );
+
+    window.location.href =
+        "admin-login.html";
+
+}
+
+
+// =====================================
+// ADD PRODUCT
+// =====================================
+
+function addProduct() {
+
+    const name =
+        document.getElementById(
+            "productName"
+        ).value.trim();
+
+
+    const price =
+        document.getElementById(
+            "productPrice"
+        ).value;
+
+
+    const category =
+        document.getElementById(
+            "productCategory"
+        ).value.trim();
+
+
+    const image =
+        document.getElementById(
+            "productImage"
+        ).value.trim();
+
+
+    // CHECK EMPTY
+
+    if (
+        name === "" ||
+        price === "" ||
+        category === "" ||
+        image === ""
+    ) {
+
+        alert(
+            "Please fill all product details."
+        );
+
+        return;
+
+    }
+
+
+    console.log(
+        "Sending product:",
+        {
+            name,
+            price,
+            category,
+            image
+        }
+    );
+
+
+    fetch(
+        "http://localhost:3000/api/products",
+        {
+
+            method: "POST",
+
+            headers: {
+
+                "Content-Type":
+                    "application/json"
+
+            },
+
+            body: JSON.stringify({
+
+                name: name,
+
+                price: Number(price),
+
+                category: category,
+
+                image: image
+
+            })
+
+        }
+
+    )
+
+    .then(response => {
+
+        console.log(
+            "Server response:",
+            response.status
+        );
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        console.log(
+            "Server data:",
+            data
+        );
+
+
+        if (data.error) {
+
+            alert(
+                "Product adding failed!\n\n"
+                + data.error
+            );
+
+            return;
+
+        }
+
+
+        alert(
+            "Product added successfully! ✅"
+        );
+
+
+        document.getElementById(
+            "productName"
+        ).value = "";
+
+
+        document.getElementById(
+            "productPrice"
+        ).value = "";
+
+
+        document.getElementById(
+            "productCategory"
+        ).value = "";
+
+
+        document.getElementById(
+            "productImage"
+        ).value = "";
+
+
+    })
+
+    .catch(error => {
+
+        console.log(
+            "FULL ERROR:",
+            error
+        );
+
+
+        alert(
+            "ERROR:\n\n"
+            + error.message
+        );
+
+    });
+
+}
+
+
+// =====================================
+// LOAD ORDERS
+// =====================================
+
+function loadOrders() {
+
+    fetch(
+        "http://localhost:3000/api/orders"
+    )
+
+    .then(response =>
+        response.json()
+    )
+
+    .then(orders => {
+
+
+        const container =
+            document.getElementById(
+                "ordersContainer"
+            );
+
+
+        container.innerHTML = "";
+
+
+        if (
+            !orders ||
+            orders.length === 0
+        ) {
+
+            container.innerHTML = `
+
+                <div class="empty">
+
+                    No orders found.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        orders.forEach(order => {
+
+
+            let itemsHTML = "";
+
+
+            if (
+                order.items &&
+                order.items.length > 0
+            ) {
+
+
+                order.items.forEach(item => {
+
+
+                    itemsHTML += `
+
+                        <p>
+
+                            🛒
+                            ${item.product_name}
+
+                            ×
+
+                            ${item.quantity}
+
+                            =
+
+                            ₹${item.subtotal}
+
+                        </p>
+
+                    `;
+
+                });
+
+
+            } else {
+
+
+                itemsHTML = `
+
+                    <p>
+                        No product details
+                    </p>
+
+                `;
+
+            }
+
+
+            container.innerHTML += `
+
+                <div class="order-card">
+
+                    <h3>
+                        Order #${order.id}
+                    </h3>
+
+
+                    <p>
+
+                        <strong>
+                            Customer:
+                        </strong>
+
+                        ${order.customer_name}
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            Phone:
+                        </strong>
+
+                        ${order.phone}
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            Address:
+                        </strong>
+
+                        ${order.address}
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            Payment:
+                        </strong>
+
+                        ${order.payment_method}
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            Total:
+                        </strong>
+
+                        ₹${order.total_amount}
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            Current Status:
+                        </strong>
+
+                        ${order.status || "Pending"}
+
+                    </p>
+
+
+                    <div class="items">
+
+                        <strong>
+                            Products:
+                        </strong>
+
+                        ${itemsHTML}
+
+                    </div>
+
+
+                    <div class="status-row">
+
+
+                        <select
+                            id="status-${order.id}">
+
+                            <option
+                                value="Pending"
+                                ${order.status === "Pending" ? "selected" : ""}>
+
+                                Pending
+
+                            </option>
+
+
+                            <option
+                                value="Confirmed"
+                                ${order.status === "Confirmed" ? "selected" : ""}>
+
+                                Confirmed
+
+                            </option>
+
+
+                            <option
+                                value="Packed"
+                                ${order.status === "Packed" ? "selected" : ""}>
+
+                                Packed
+
+                            </option>
+
+
+                            <option
+                                value="Delivered"
+                                ${order.status === "Delivered" ? "selected" : ""}>
+
+                                Delivered
+
+                            </option>
+
+                        </select>
+
+
+                        <button
+                            class="update-btn"
+                            onclick="updateStatus(${order.id})">
+
+                            Update Status
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+            `;
+
+        });
+
+    })
+
+    .catch(error => {
+
+        console.log(
+            "Orders error:",
+            error
+        );
+
+
+        document.getElementById(
+            "ordersContainer"
+        ).innerHTML = `
+
+            <div class="empty">
+
+                Error loading orders.
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+// =====================================
+// UPDATE ORDER STATUS
+// =====================================
+
+function updateStatus(orderId) {
+
+
+    const select =
+        document.getElementById(
+            "status-" + orderId
+        );
+
+
+    const status =
+        select.value;
+
+
+    fetch(
+        "http://localhost:3000/api/orders/"
+        + orderId
+        + "/status",
+
+        {
+
+            method: "PUT",
+
+            headers: {
+
+                "Content-Type":
+                    "application/json"
+
+            },
+
+            body: JSON.stringify({
+
+                status: status
+
+            })
+
+        }
+
+    )
+
+    .then(response =>
+        response.json()
+    )
+
+    .then(data => {
+
+
+        if (data.error) {
+
+            alert(
+                "Status update failed!\n\n"
+                + data.error
+            );
+
+            return;
+
+        }
+
+
+        alert(
+            "Order status updated to "
+            + status
+        );
+
+
+        loadOrders();
+
+    })
+
+    .catch(error => {
+
+        console.log(
+            "Status error:",
+            error
+        );
+
+
+        alert(
+            "Status update error:\n\n"
+            + error.message
+        );
+
+    });
+
+}
+
+
+// =====================================
+// PAGE LOAD
+// =====================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        loadOrders();
+
+    }
+);
+
+
+</script>
+
+</body>
+
+</html>

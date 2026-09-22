@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout - FreshMart</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        Fresh Products | Best Prices
+    </div>
+
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="logo">
+
+            <h1>FreshMart</h1>
+
+            <p>
+                Fresh • Healthy • Affordable
+            </p>
+
+        </div>
+
+        <div class="cart-link">
+
+            🛒 <a href="cart.html">Cart</a>
+
+        </div>
+
+    </header>
+
+
+    <!-- CHECKOUT TITLE -->
+    <div class="checkout-title">
+
+        <h1>Checkout</h1>
+
+        <p>
+            Complete your order
+        </p>
+
+    </div>
+
+
+    <!-- CHECKOUT CONTAINER -->
+    <div class="checkout-container">
+
+
+        <!-- CUSTOMER DETAILS -->
+        <div class="customer-details">
+
+            <h2>
+                Customer Details
+            </h2>
+
+
+            <!-- NAME -->
+            <label for="customerName">
+                Name
+            </label>
+
+            <input
+                type="text"
+                id="customerName"
+                placeholder="Enter your name"
+            >
+
+
+            <!-- PHONE -->
+            <label for="customerPhone">
+                Phone Number
+            </label>
+
+            <input
+                type="tel"
+                id="customerPhone"
+                placeholder="Enter 10 digit phone number"
+                maxlength="10"
+            >
+
+
+            <!-- ADDRESS -->
+            <label for="customerAddress">
+                Delivery Address
+            </label>
+
+            <textarea
+                id="customerAddress"
+                placeholder="Enter your delivery address"
+            ></textarea>
+
+
+            <!-- PAYMENT -->
+            <h2 class="payment-title">
+                Payment Method
+            </h2>
+
+
+            <!-- UPI -->
+            <label class="payment-option">
+
+                <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="UPI"
+                    onclick="showUPI()"
+                >
+
+                <span>
+                    UPI Payment
+                </span>
+
+            </label>
+
+
+            <!-- COD -->
+            <label class="payment-option">
+
+                <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="Cash on Delivery"
+                    onclick="hideUPI()"
+                    checked
+                >
+
+                <span>
+                    Cash on Delivery
+                </span>
+
+            </label>
+
+
+            <!-- UPI ID -->
+            <div
+                id="upiSection"
+                class="upi-section"
+                style="display: none;"
+            >
+
+                <label for="upiId">
+                    UPI ID
+                </label>
+
+                <input
+                    type="text"
+                    id="upiId"
+                    placeholder="example@upi"
+                >
+
+                <p class="upi-note">
+                    Enter your UPI ID for payment.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ORDER SUMMARY -->
+        <div class="order-summary">
+
+            <h2>
+                Product Details
+            </h2>
+
+
+            <div id="checkoutItems">
+                <!-- Products displayed by JavaScript -->
+            </div>
+
+
+            <!-- TOTAL -->
+            <div class="checkout-total-box">
+
+                <span>
+                    Total Amount
+                </span>
+
+                <strong id="checkoutTotal">
+                    ₹0
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PLACE ORDER -->
+    <div class="place-order-section">
+
+        <button
+            type="button"
+            onclick="placeOrder()"
+        >
+            Place Order
+        </button>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="./script.js"></script>
+
+</body>
+
+</html>

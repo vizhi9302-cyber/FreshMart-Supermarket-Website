@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FreshMart - Order Success</title>
+
+    <link rel="stylesheet"
+          href="style2.css">
+
+</head>
+
+<body>
+
+
+    <!-- HEADER -->
+    <header>
+
+        <h1>🛒 FreshMart</h1>
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="shop.html">
+                Shop
+            </a>
+
+            <a href="cart.html">
+                Cart
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- SUCCESS SECTION -->
+    <section class="success-section">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+
+        <h1>
+            Order Placed Successfully!
+        </h1>
+
+
+        <p class="thank-you">
+
+            Thank you for shopping with FreshMart.
+            Your order has been confirmed.
+
+        </p>
+
+
+        <!-- ORDER DETAILS -->
+        <div class="order-details">
+
+            <h2>
+                Order Details
+            </h2>
+
+
+            <!-- ORDER ID -->
+            <div class="detail-row">
+
+                <span>
+                    Order ID
+                </span>
+
+                <strong id="orderId">
+                    -
+                </strong>
+
+            </div>
+
+
+            <!-- TOTAL -->
+            <div class="detail-row">
+
+                <span>
+                    Total Amount
+                </span>
+
+                <strong id="orderTotal">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <!-- PAYMENT -->
+            <div class="detail-row">
+
+                <span>
+                    Payment Method
+                </span>
+
+                <strong id="paymentMethod">
+                    -
+                </strong>
+
+            </div>
+
+
+            <!-- STATUS -->
+            <div class="detail-row">
+
+                <span>
+                    Order Status
+                </span>
+<p>
+                <strong id="orderStatus">
+                    confirmed
+                </strong></p>
+
+            </div>
+
+        </div>
+
+
+        <!-- BUTTONS -->
+        <div class="success-buttons">
+
+            <a href="shop.html">
+
+                <button>
+                    Continue Shopping
+                </button>
+
+            </a>
+
+
+            <a href="index.html">
+
+                <button class="home-btn">
+                    Go to Home
+                </button>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            © 2026 FreshMart. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- ORDER SUCCESS JAVASCRIPT -->
+    <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const savedOrder =
+        JSON.parse(localStorage.getItem("order"));
+
+    if (!savedOrder) {
+        return;
+    }
+
+    // Order ID
+    const orderIdElement =
+        document.getElementById("orderId");
+
+    if (orderIdElement) {
+        orderIdElement.innerText =
+            savedOrder.orderId || "-";
+    }
+
+    // Total Amount
+    const totalElement =
+        document.getElementById("orderTotal");
+
+    if (totalElement) {
+        totalElement.innerText =
+            "₹" + (savedOrder.totalAmount || 0);
+    }
+
+    // Payment Method
+    const paymentElement =
+        document.getElementById("paymentMethod");
+
+    if (paymentElement) {
+        paymentElement.innerText =
+            savedOrder.paymentMethod ||
+            "Cash on Delivery";
+    }
+
+    // Get latest status from backend
+    const orderId =
+        savedOrder.orderId.replace("FM", "");
+
+    fetch("http://localhost:3000/api/orders")
+        .then(response => response.json())
+        .then(orders => {
+
+            const currentOrder =
+                orders.find(
+                    order => order.id == orderId
+                );
+                console.log("order ID:,orderId");
+                console.log("Current Order",currentOrder);
+
+            if (currentOrder) {
+
+                const statusElement =
+                    document.getElementById(
+                        "orderStatus"
+                    );
+
+                if (statusElement) {
+                    statusElement.innerText =
+                        currentOrder.status ||
+                        "Pending";
+                }
+
+            }
+
+        })
+        .catch(error => {
+            console.log(
+                "Status fetch error:",
+                error
+            );
+        });
+
+});
+
+</script>
+<script src="script.js"></script>
+
+</body>
+
+</html>

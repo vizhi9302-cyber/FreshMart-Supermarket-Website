@@ -1,0 +1,224 @@
+/* BODY */
+
+body {
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background-color: #f5f5f5;
+}
+
+
+/* HEADER */
+
+header {
+    background-color: green;
+
+    color: white;
+
+    padding: 18px 40px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+
+/* NAVIGATION */
+
+nav a {
+    color: white;
+
+    text-decoration: none;
+
+    margin-left: 20px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+
+/* PAGE TITLE */
+
+.wishlist-title {
+    background-color: white;
+
+    text-align: center;
+
+    padding: 45px 20px;
+}
+
+.wishlist-title p {
+    color: green;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+.wishlist-title h2 {
+    font-size: 32px;
+
+    margin: 10px 0;
+}
+
+.wishlist-title span {
+    color: #666;
+}
+
+
+/* WISHLIST CONTAINER */
+
+.wishlist-container {
+    width: 85%;
+
+    margin: 50px auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 30px;
+}
+
+
+/* WISHLIST CARD */
+
+.wishlist-card {
+    background-color: white;
+
+    padding: 20px;
+
+    text-align: center;
+
+    border-radius: 10px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+
+/* IMAGE */
+
+.wishlist-card img {
+    width: 100%;
+
+    height: 220px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+}
+
+
+/* PRODUCT NAME */
+
+.wishlist-card h3 {
+    font-size: 21px;
+
+    margin: 15px 0 8px;
+}
+
+
+/* PRICE */
+
+.wishlist-card p {
+    color: green;
+
+    font-size: 19px;
+
+    font-weight: bold;
+}
+
+
+/* BUTTON */
+
+.wishlist-card button {
+    background-color: green;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 15px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    margin: 5px;
+}
+
+.wishlist-card button:hover {
+    background-color: darkgreen;
+}
+
+
+/* REMOVE BUTTON */
+
+.wishlist-card .remove-btn {
+    background-color: #d9534f;
+}
+
+.wishlist-card .remove-btn:hover {
+    background-color: #c9302c;
+}
+
+
+/* CONTINUE SHOPPING */
+
+.continue {
+    text-align: center;
+
+    margin: 30px;
+}
+
+.continue a {
+    color: green;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+
+/* FOOTER */
+
+footer {
+    background-color: #222;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 20px;
+
+    margin-top: 60px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    header {
+        padding: 15px;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .wishlist-container {
+        width: 90%;
+
+        grid-template-columns: 1fr;
+    }
+
+}

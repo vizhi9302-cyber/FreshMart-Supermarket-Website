@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Shop - FreshMart</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+<body>
+
+    <!-- Top Bar -->
+
+    <div class="top-bar">
+        Fresh Products | Best Prices
+    </div>
+
+
+    <!-- Header -->
+
+    <header class="header">
+
+        <div class="logo">
+            FreshMart
+        </div>
+
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+            <input type="text"
+                   id="searchInput"
+                   placeholder="Search products...">
+
+            <button onclick="searchProducts()">
+                Search
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- Navigation -->
+
+    <nav class="navbar">
+
+        <a href="index.html">Home</a>
+
+        <a href="shop.html">Shop</a>
+
+        <a href="cart.html">Cart</a>
+
+        <a href="product.html">Categories</a>
+
+        <a href="offers.html">Offers</a>
+
+        <a href="contact.html">Contact</a>
+
+    </nav>
+
+
+    <!-- Shop Section -->
+
+    <section class="shop-page">
+
+        <h1 class="shop-title">
+            Our Products
+        </h1>
+
+
+        <!-- Categories -->
+
+        <div class="shop-categories">
+
+            <button onclick="filterProducts('all')">
+                All
+            </button>
+
+            <button onclick="filterProducts('vegetables')">
+                Vegetables
+            </button>
+
+            <button onclick="filterProducts('fruits')">
+                Fruits
+            </button>
+
+            <button onclick="filterProducts('grocery')">
+                Grocery
+            </button>
+
+            <button onclick="filterProducts('dairy')">
+                Dairy
+            </button>
+
+        </div>
+
+
+        <!-- Products -->
+
+        <div class="product-container" id="productsContainer">
+
+
+            <!-- Apple -->
+
+            <div class="product-card">
+
+                <img src="img/apple.jpg"
+                     alt="Apple">
+
+                <h3>
+                    Fresh Apple
+                </h3>
+
+                <p>
+                    Fresh and juicy apples
+                </p>
+
+                <p class="price">
+                    ₹120 / kg
+                </p>
+
+                <button class="cart-btn"
+                        onclick="addToCart(this)">
+
+                    Add to Cart
+
+                </button>
+
+            </div>
+
+
+            <!-- Banana -->
+
+            <div class="product-card">
+                 
+
+                <img src="img/banana.jpg"
+                     alt="Banana">
+
+                <h3>
+                    Fresh Banana
+                </h3>
+
+                <p>
+                    Fresh yellow bananas
+                </p>
+
+                <p class="price">
+                    ₹60 / kg
+                </p>
+
+                <button class="cart-btn"
+                        onclick="addToCart(this)">
+
+                    Add to Cart
+
+                </button>
+
+            </div>
+
+
+            <!-- Tomato -->
+
+            <div class="product-card">
+                 
+
+                <img src="img/tomato.jpg"
+                     alt="Tomato">
+
+                <h3>
+                    Fresh Tomato
+                </h3>
+
+                <p>
+                    Fresh red tomatoes
+                </p>
+
+                <p class="price">
+                    ₹40 / kg
+                </p>
+
+                <button class="cart-btn"
+                        onclick="addToCart(this)">
+
+                    Add to Cart
+
+                </button>
+
+            </div>
+
+
+            <!-- Milk -->
+
+            <div class="product-card">
+                 
+
+                <img src="img/milk.jpg"
+                     alt="Milk">
+
+                <h3>
+                    Fresh Milk
+                </h3>
+
+                <p>
+                    Pure and fresh milk
+                </p>
+
+                <p class="price">
+                    ₹60 / litre
+                </p>
+
+                <button class="cart-btn"
+                        onclick="addToCart(this)">
+
+                    Add to Cart
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 FreshMart. All Rights Reserved.
+        </p>
+
+    </footer>
+    <script>
+
+function searchProducts() {
+
+    const input =
+        document.getElementById("searchInput");
+
+    const searchText =
+        input.value.trim().toLowerCase();
+
+    const products =
+        document.querySelectorAll(".product-card");
+
+    products.forEach(function(product) {
+
+        const productName =
+            product.querySelector("h3")
+            .innerText
+            .toLowerCase();
+
+        const description =
+            product.querySelector("p")
+            .innerText
+            .toLowerCase();
+
+        if (
+            productName.includes(searchText) ||
+            description.includes(searchText)
+        ) {
+
+            product.style.display = "";
+
+        } else {
+
+            product.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+
+    <!-- JavaScript -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
